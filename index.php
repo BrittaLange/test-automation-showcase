@@ -10,15 +10,15 @@
 
 <body>
     <div class="m-5">
-        <form action="form_action.php" method="GET">
+        <form action="form_action.php" method="POST">
             <legend>Create new customer</legend>
             <div class="mb-3">
                 <label for="inputName" class="form-label">Name</label>
-                <input type="text" class="form-control" id="inputName">
+                <input type="text" name="name" class="form-control" id="inputName">
             </div>
             <div class="mb-3">
                 <label for="inputLocation" class="form-label">Location</label>
-                <input type="text" class="form-control" id="inputLocation">
+                <input type="text" name="location" class="form-control" id="inputLocation">
             </div>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
