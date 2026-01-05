@@ -5,6 +5,8 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 // Variable declaration.
 $update = false;
 $id = -1;
+$message = '';
+$messageType = '';
 // Deleting a customer dataset.
 if (isset($_GET['delete'])) {
     try {
@@ -12,6 +14,8 @@ if (isset($_GET['delete'])) {
         $sql = "DELETE FROM customers WHERE id = $id";
         $affectedRows = $db->exec($sql);
         echo $affectedRows . " datasets deleted.";
+        $message = 'Your data has been deleted.';
+        $messageType = 'success';
     } catch (PDOException $e) {
         echo "Deleting dataset failed. " . $e->getMessage();
     }
@@ -106,10 +110,15 @@ if (isset($_POST['name'])) {
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Success!</strong> Your data has been saved.
+                <?php if (isset($message)): ?>
+                <div class="alert alert-<?= $messageType ?> alert-dismissible fade show" role="alert">
+                    <?php 
+                    echo $message;
+                    unset($message);
+                    ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
+                <?php endif ?>
             </div>
         </div>
     </div>
