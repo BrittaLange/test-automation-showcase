@@ -113,7 +113,7 @@ if (isset($_POST['name'])) {
                 <?php if (isset($message)): ?>
                 <div class="alert alert-<?= $messageType ?> alert-dismissible fade show" role="alert">
                     <?php 
-                    echo $message;
+                    echo htmlspecialchars($message);
                     unset($message);
                     ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -140,13 +140,13 @@ if (isset($_POST['name'])) {
                         $sql = "SELECT id, name, location FROM customers";
                         foreach ($db->query($sql) as $row) {
                             echo "<tr>";
-                            echo "<td>" . htmlspecialchars($row[1]) . "</td>";
-                            echo "<td>" . htmlspecialchars($row[2]) . "</td>";
+                            echo "<td>" . htmlspecialchars($row[1], ENT_QUOTES, 'UTF-8') . "</td>";
+                            echo "<td>" . htmlspecialchars($row[2], ENT_QUOTES, 'UTF-8') . "</td>";
                             echo '<td>';
                             echo '<a href="index.php?edit=';
-                            echo $row[0] . '" class="btn btn-info me-2" type="button">Edit</a>';
+                            echo htmlspecialchars($row[0], ENT_QUOTES, 'UTF-8') . '" class="btn btn-info me-2" type="button">Edit</a>';
                             echo '<a href="index.php?delete=';
-                            echo $row[0] . '" class="btn btn-danger" type="button">Delete</a>';
+                            echo htmlspecialchars($row[0], ENT_QUOTES, 'UTF-8') . '" class="btn btn-danger" type="button">Delete</a>';
                             echo '</td>';
                             echo "</tr>";
                         }
@@ -168,12 +168,12 @@ if (isset($_POST['name'])) {
                     <input type="text" hidden name="id" value="<?php echo $id ?>">
                     <div class="mb-3">
                         <label for="inputName" class="form-label">Name</label>
-                        <input type="text" name="name" class="form-control" id="inputName" maxlength="120" value=<?= $name ?? '' ?>>
+                        <input type="text" name="name" class="form-control" id="inputName" maxlength="120" value="<?= htmlspecialchars($name ?? '', ENT_QUOTES, 'UTF-8') ?>">
                         <div id="nameRequired" class="form-text text-danger"><?= $errorMessage['name'] ?? ''; ?></div>
                     </div>
                     <div class="mb-3">
                         <label for="inputLocation" class="form-label">Location</label>
-                        <input type="text" name="location" class="form-control" id="inputLocation" maxlength="120" value=<?= $location ?? '' ?>>
+                        <input type="text" name="location" class="form-control" id="inputLocation" maxlength="120" value="<?= htmlspecialchars($location ?? '', ENT_QUOTES, 'UTF-8') ?>">
                         <div id="locationRequired" class="form-text text-danger"><?= $errorMessage['location'] ?? ''; ?></div>
                     </div>
                     <?php if ($update == true): ?>
