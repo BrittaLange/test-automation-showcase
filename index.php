@@ -17,7 +17,9 @@ if (isset($_GET['delete'])) {
         $messageType = 'success';
     } catch (PDOException $e) {
         echo "Deleting dataset failed. " . $e->getMessage();
-    }
+        $message = "Deleting customer failed.";
+        $messageType = 'danger';
+}
 }
 // Start edit mode.
 if (isset($_GET['edit'])) {
@@ -70,9 +72,13 @@ if (isset($_POST['name'])) {
                 ":name" => $name,
                 ":location" => $location
             ]);
+            $message = "New customer has been saved.";
+            $messageType = 'success';
             echo $stmt->rowCount() . " row/s of data affected.";
         } catch (PDOException $e) {
             echo "Saving data did not work: " . $e->getMessage();
+            $message = "New customer could not be saved.";
+            $messageType = 'danger';
         }
     }
     // Updating a customer.
