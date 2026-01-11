@@ -1,4 +1,4 @@
-# E2E Testing Lab
+# Test Automation Showcase
 
 ## Overview
 This repository is a **learning-focused demo project** showcasing professional
