@@ -43,6 +43,16 @@ environment**, while remaining transparent about learning outcomes and trade-off
 
 ---
 
+## Roadmap
+
+- [ ] Specify test cases
+- [ ] Add Playwright test implementation
+- [ ] Add Selenium test implementation
+- [ ] Add Cycpress test implementation
+- [ ] Add CI pipeline
+
+---
+
 ## Technologies
 
 - **Playwright** – modern web E2E testing
