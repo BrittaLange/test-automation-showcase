@@ -1,6 +1,11 @@
 <?php
+// Check if config file is readable.
+$path = __DIR__ . '/../../../config/connect.php';
+if (!is_readable($path)) {
+    die('Configuration file is missing or not readable.');
+}
 // Connect to database.
-$db = require_once  '../../config/connect.php';
+$db = require_once  $path;
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 // Variable declaration.
 $update = false;
