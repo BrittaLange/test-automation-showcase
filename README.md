@@ -80,6 +80,25 @@ on a test structure and scenarios designed by me, and were
 then reviewed, refined, and organized to reflect QA practices 
 and testing strategies.
 
+### TestCaseStatus 
+
+The TestCaseStatus reflects the lifecycle of a test case,
+independent from its execution result.
+It can have the following values:
+
+- Draft: Test case is newly created and not finalized
+- In Review: Test case is under review
+- Approved: Test case is reviewed and ready for execution
+- Deprecated: Test case is obsolete and no longer used
+
+### AutomationStatus
+
+The AutomationStatus indicates if a test case is covered by automated tests:
+
+- Not Automated: Manual test only
+- Planned: Automation planned but not implemented yet
+- Automated: Covered by automated tests
+
 ---
 
 ## AI-assisted workflow
