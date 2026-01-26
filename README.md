@@ -109,6 +109,22 @@ ensure correctness, relevance, and maintainability.
 
 ---
 
+## Installation
+
+### Install Playwright
+
+Playwright supports four programming languages: JavaScript, TypeScript,
+Python, Java.
+Although TypeScript was not my primary language before this project, 
+it was intentionally selected to work with a type-safe, 
+production-oriented test stack and to gain hands-on experience 
+with tooling commonly used in modern automation projects.
+
+Install Playwright via npm:
+    npm init playwright@latest
+
+---
+
 ## License
 
 This project is licensed under the MIT License.
