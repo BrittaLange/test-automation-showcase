@@ -1,18 +1,17 @@
 TestCaseID,SecurityCategory,Title,Preconditions,TestSteps,AttackVector,TestData,ExpectedResult,TestCaseStatus,AutomationStatus
-SEC-A03-001,XSS,Prevent stored XSS in name field,User is on create form,"Enter script payload in name and submit",Stored XSS,"<script>alert(1)</script>",Script is not executed and input is escaped,Draft,Not Automated
-SEC-A03-002,XSS,Prevent reflected XSS in location field,User is on create form,"Enter payload in location and submit",Reflected XSS,"<img src=x onerror=alert(1)>",Script is not executed,Draft,Not Automated
-SEC-A03-003,SQL Injection,Prevent SQL injection in name field,User is on create form,"Submit SQL payload in name",SQL Injection,"' OR '1'='1",Input is handled safely and no SQL error occurs,Draft,Not Automated
-SEC-A03-004,SQL Injection,Prevent destructive SQL injection,User is on create form,"Submit destructive SQL payload",SQL Injection,"'; DROP TABLE customers;--",Database is not modified,Draft,Not Automated
-SEC-A03-005,HTML Injection,Reject HTML markup in inputs,User is on create form,"Submit HTML tags",HTML Injection,"<b>Test</b>",HTML is escaped or stripped,Draft,Not Automated
+SEC-A03-001,XSS,Prevent stored XSS in name field,User is on create form,"Enter script payload in name and submit",Stored XSS,"<script>alert(1)</script>",Script is not executed and input is escaped,In Review,Not Automated
+SEC-A03-002,XSS,Prevent reflected XSS in location field,User is on create form,"Enter payload in location and submit",Reflected XSS,"<img src=x onerror=alert(1)>",Script is not executed,In Review,Not Automated
+SEC-A03-003,SQL Injection,Prevent SQL injection in name field,User is on create form,"Submit SQL payload in name",SQL Injection,"' OR '1'='1",Input is handled safely and no SQL error occurs,In Review,Not Automated
+SEC-A03-004,SQL Injection,Prevent destructive SQL injection,User is on create form,"Submit destructive SQL payload",SQL Injection,"'; DROP TABLE customers;--",Database is not modified,In Review,Not Automated
+SEC-A03-005,HTML Injection,Reject HTML markup in inputs,User is on create form,"Submit HTML tags",HTML Injection,"<b>Test</b>",HTML is escaped or stripped,In Review,Not Automated
 
-SEC-A04-001,Validation,Reject empty input server-side,Client-side validation is bypassed,"Submit empty name and location",Validation Bypass,"Name=; Location=",Server-side validation rejects request,Draft,Not Automated
-SEC-A04-002,Validation,Reject overly long input,User is on create form,"Submit very long input",Boundary Testing,"Name=500 chars",Input is rejected or truncated safely,Draft,Not Automated
-SEC-A04-003,Business Logic,Prevent duplicate customer creation,None,"Create customer with same data twice",Logic Flaw,"Same name/location twice",Duplicate handling is enforced,Draft,Not Automated
-SEC-A04-004,Rate Limiting,Detect missing rate limiting,None,"Submit form repeatedly in short time",Abuse Scenario,"Multiple rapid requests",Application handles requests safely,Draft,Not Automated
-SEC-A04-005,Trust Boundary,Do not rely on client-side validation,Client-side JS disabled,"Submit invalid data",Client Bypass,"Invalid payload",Server validation prevents processing,Draft,Not Automated
+SEC-A04-001,Validation,Reject empty input server-side,Client-side validation is bypassed,"Submit empty name and location",Validation Bypass,"Name=; Location=",Server-side validation rejects request,In Review,Not Automated
+SEC-A04-002,Validation,Reject overly long input,User is on create form,"Submit very long input",Boundary Testing,"Name=500 chars",Input is rejected or truncated safely,In Review,Not Automated
+SEC-A04-003,Business Logic,Prevent duplicate customer creation,None,"Create customer with same data twice",Logic Flaw,"Same name/location twice",Duplicate handling is enforced,In Review,Not Automated
+SEC-A04-004,Rate Limiting,Detect missing rate limiting,None,"Submit form repeatedly in short time",Abuse Scenario,"Multiple rapid requests",Application handles requests safely,In Review,Not Automated
 
-SEC-A05-001,Error Handling,Do not expose stack traces,Application running,"Trigger backend error",Error Disclosure,"Invalid payload",Generic error message is shown,Draft,Not Automated
-SEC-A05-002,Configuration,Prevent access to config files,None,"Access config file via URL",Direct File Access,"/config/connect.php",Access is denied,Draft,Not Automated
-SEC-A05-003,Configuration,Debug mode disabled in production,Application deployed,"Trigger application error",Debug Exposure,N/A,Debug information is not exposed,Draft,Not Automated
-SEC-A05-004,Headers,Security headers are set,Application running,"Inspect HTTP response headers",Missing Headers,N/A,Security headers are present,Draft,Not Automated
-SEC-A05-005,Defaults,Remove default credentials or pages,None,"Access default or test pages",Default Config,"/phpinfo.php",Access is denied,Draft,Not Automated
+SEC-A05-001,Error Handling,Do not expose stack traces,Application running,"Trigger backend error",Error Disclosure,"Invalid payload",Generic error message is shown,In Review,Not Automated
+SEC-A05-002,Configuration,Prevent access to config files,None,"Access config file via URL",Direct File Access,"/config/connect.php",Access is denied,In Review,Not Automated
+SEC-A05-003,Configuration,Debug mode disabled in production,Application deployed,"Trigger application error",Debug Exposure,N/A,Debug information is not exposed,In Review,Not Automated
+SEC-A05-004,Headers,Security headers are set,Application running,"Inspect HTTP response headers",Missing Headers,N/A,Security headers are present,In Review,Not Automated
+SEC-A05-005,Defaults,Remove default credentials or pages,None,"Access default or test pages",Default Config,"/phpinfo.php",Access is denied,In Review,Not Automated
