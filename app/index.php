@@ -83,9 +83,17 @@ if (isset($_POST['name'])) {
             unset($name);
             unset($location);
         } catch (PDOException $e) {
-            echo "Saving data did not work: " . $e->getMessage();
-            $message = "New customer could not be saved.";
-            $messageType = 'danger';
+             switch ($e->getCode()) {
+                case '23000':
+                    // Integrity constraint violation: Duplicate entry.
+                    $message = "Customer already exists.";
+                    $messageType = 'danger';
+                    break;
+                default:
+                    $message = "New customer could not be saved.";
+                    $messageType = 'danger';
+                    break;
+            }
         }
     }
     // Updating a customer.
@@ -106,9 +114,17 @@ if (isset($_POST['name'])) {
                 unset($location);
             }
         } catch (PDOException $e) {
-            echo "Update operation failed. " . $e->getMessage();
-            $message = "Update operation failed. Contact your admin.";
-            $messageType = 'danger';
+             switch ( $driverCode = $e->errorInfo[1] ?? null) {
+                case '1062':
+                    // Integrity constraint violation: Duplicate entry.
+                    $message = "Customer already exists. No changes were made";
+                    $messageType = 'danger';
+                    break;
+                default:
+                    $message = "Update operation failed. Contact your admin.";
+                    $messageType = 'danger';
+                    break;
+            }
         }
     }
 }
