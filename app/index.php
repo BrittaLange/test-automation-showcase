@@ -171,10 +171,17 @@ if (isset($_POST['name'])) {
                         <?php
                         // Retrieve and display all customers in a table.
                         $sql = "SELECT id, name, location FROM customers";
-                        foreach ($db->query($sql) as $row) {
+                        $stmt = $db->query($sql);
+                        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        if (empty($rows)) {
                             echo "<tr>";
-                            echo "<td>" . htmlspecialchars($row[1], ENT_QUOTES, 'UTF-8') . "</td>";
-                            echo "<td>" . htmlspecialchars($row[2], ENT_QUOTES, 'UTF-8') . "</td>";
+                            echo "<td colspan='3' style='text-align:center;'>No customers found.</td>";
+                            echo "</tr>";
+                        } else {
+                            foreach ($rows as $row) {
+                            echo "<tr>";
+                            echo "<td>" . htmlspecialchars($row['name'], ENT_QUOTES, 'UTF-8') . "</td>";
+                            echo "<td>" . htmlspecialchars($row['location'], ENT_QUOTES, 'UTF-8') . "</td>";
                             echo '<td>';
                             echo '<a href="index.php?edit=';
                             echo htmlspecialchars($row[0], ENT_QUOTES, 'UTF-8') . '" class="btn btn-info me-2" type="button">Edit</a>';
@@ -182,6 +189,7 @@ if (isset($_POST['name'])) {
                             echo htmlspecialchars($row[0], ENT_QUOTES, 'UTF-8') . '" class="btn btn-danger" type="button">Delete</a>';
                             echo '</td>';
                             echo "</tr>";
+                            }
                         }
                         ?>
                     </tbody>
