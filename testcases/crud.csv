@@ -2,8 +2,8 @@ TestCaseID,CRUDOperation,Title,Preconditions,TestSteps,InputData,ExpectedResult,
 TC-CRUD-001,CREATE,Create customer with valid data,none,"Enter valid name and location and submit",Name=John Wayne; Location=Denver,Customer is saved successfully and is displayed in customers list,Approved,Planned
 TC-CRUD-002,CREATE,Create customer with empty name,none,"Leave name empty, enter location and submit",Name=; Location=Denver,Validation error is shown and customer is not saved,Approved,Planned
 TC-CRUD-003,CREATE,Create customer with empty location,none,"Enter name, leave location empty and submit",Name=John Wayne; Location=,Validation error is shown and customer is not saved,Approved,Planned
-TC-CRUD-004,CREATE,Create customer with name exceeding max length,none,"Enter too long name and submit",Name=201+Characters; Location=Denver,Validation error is shown and customer is not saved,Approved,Planned
-TC-CRUD-015,CREATE,Create customer with location exceeding max length,none,"Enter too long location and submit",Name=Danilo; Location=201+Characters,Validation error is shown and customer is not saved,Approved,Planned
+TC-CRUD-004,CREATE,Create customer with name exceeding max length,none,"Enter too long name and submit",Name=121+Characters; Location=Denver,Validation error is shown and customer is not saved,Approved,Planned
+TC-CRUD-015,CREATE,Create customer with location exceeding max length,none,"Enter too long location and submit",Name=Danilo; Location=121+Characters,Validation error is shown and customer is not saved,Approved,Planned
 
 TC-CRUD-005,READ,View customer list with existing records,At least one customer exists,"Open customer list page",none,Customer list is displayed with all saved customers,Approved,Planned
 TC-CRUD-007,READ,View empty customer list,No customers exist,"Open customer list page",none,Empty state message is displayed,Approved,Planned
