@@ -125,6 +125,16 @@ Install Playwright via npm:
 
 ---
 
+### Install Cypress
+
+Cypress is a modern end-to-end testing framework for web applications. 
+Tests are written in JavaScript or TypeScript and run directly in the browser, 
+allowing fast, reliable testing of user interactions, UI behavior, and API requests. 
+I chose to write the tests in TypeScript as well.
+
+Install Cypress via npm:
+    npm install cypress --save-dev
+
 ## License
 
 This project is licensed under the MIT License.
