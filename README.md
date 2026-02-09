@@ -113,8 +113,7 @@ ensure correctness, relevance, and maintainability.
 
 ### Install Playwright
 
-Playwright supports four programming languages: JavaScript, TypeScript,
-Python, Java.
+Playwright supports four programming languages: JavaScript, TypeScript, Python, Java.
 Although TypeScript was not my primary language before this project, 
 it was intentionally selected to work with a type-safe, 
 production-oriented test stack and to gain hands-on experience 
@@ -134,6 +133,22 @@ I chose to write the tests in TypeScript as well.
 
 Install Cypress via npm:
     npm install cypress --save-dev
+
+---
+
+### Install Selenium
+
+Seleniums main project supports five programming languages: C#/.NET, Ruby, JavaScript, Python and Java.
+I chose Java because it offers one of the most robust and widely adopted integrations with Selenium, making it a strong choice for enterprise-grade automation. Its seamless compatibility with Maven, TestNG, and CI/CD pipelines enables the development of scalable, maintainable, and production-ready test frameworks.
+
+Install Selenium via Maven:
+mvn archetype:generate
+with following parameters: 
+- DgroupId=com.britta.selenium 
+- DartifactId=selenium-demo 
+- DarchetypeArtifactId=maven-archetype-quickstart 
+
+---
 
 ## License
 
