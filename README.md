@@ -150,6 +150,24 @@ with following parameters:
 
 ---
 
+## Documentation
+
+### Selenium
+
+https://www.selenium.dev/selenium/docs/api/java/index.html
+
+Run test: right-click on test case file and run
+
+### Playright
+
+https://playwright.dev/docs/intro
+
+Run test: npx playwright test --headed
+
+Run test in UI mode: npx playwright test --ui
+
+---
+
 ## License
 
 This project is licensed under the MIT License.
