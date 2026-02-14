@@ -17,11 +17,10 @@ if (isset($_GET['delete'])) {
         $id = $_GET['delete'];
         $sql = "DELETE FROM customers WHERE id = $id";
         $affectedRows = $db->exec($sql);
-        echo $affectedRows . " datasets deleted.";
+
         $message = 'Your data has been deleted.';
         $messageType = 'success';
     } catch (PDOException $e) {
-        echo "Deleting dataset failed. " . $e->getMessage();
         $message = "Deleting customer failed.";
         $messageType = 'danger';
     }
@@ -40,7 +39,8 @@ if (isset($_GET['edit'])) {
             }
         }
     } catch (PDOException $e) {
-        echo "Editing failed. " . $e->getMessage();
+        $message = "Editing customer failed.";
+        $messageType = 'danger';
     }
 }
 // Input Validations
@@ -79,7 +79,6 @@ if (isset($_POST['name'])) {
             ]);
             $message = "New customer has been saved.";
             $messageType = 'success';
-            echo $stmt->rowCount() . " row/s of data affected.";
             unset($name);
             unset($location);
         } catch (PDOException $e) {
