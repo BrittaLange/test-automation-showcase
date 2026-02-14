@@ -184,9 +184,9 @@ if (isset($_POST['name'])) {
                             echo "<td>" . htmlspecialchars($row['location'], ENT_QUOTES, 'UTF-8') . "</td>";
                             echo '<td>';
                             echo '<a href="index.php?edit=';
-                            echo htmlspecialchars($row[0], ENT_QUOTES, 'UTF-8') . '" class="btn btn-info me-2" type="button">Edit</a>';
+                            echo htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '" class="btn btn-info me-2" type="button">Edit</a>';
                             echo '<a href="index.php?delete=';
-                            echo htmlspecialchars($row[0], ENT_QUOTES, 'UTF-8') . '" class="btn btn-danger" type="button">Delete</a>';
+                            echo htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '" class="btn btn-danger" type="button">Delete</a>';
                             echo '</td>';
                             echo "</tr>";
                             }
