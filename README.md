@@ -119,6 +119,8 @@ it was intentionally selected to work with a type-safe,
 production-oriented test stack and to gain hands-on experience 
 with tooling commonly used in modern automation projects.
 
+Playwright comes with its own gitignore file. I appreciate!
+
 Install Playwright via npm:
     npm init playwright@latest
 
@@ -165,6 +167,16 @@ https://playwright.dev/docs/intro
 Run test: npx playwright test --headed
 
 Run test in UI mode: npx playwright test --ui
+
+### Cypress
+
+https://docs.cypress.io/api/table-of-contents
+
+Run cypress: npx cypress open
+
+I really like the real world app cypress comes with to show 
+best practices and scalable strategies with Cypress: 
+https://github.com/cypress-io/cypress-realworld-app
 
 ---
 

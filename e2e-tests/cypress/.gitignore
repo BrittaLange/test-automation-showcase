@@ -1,0 +1,17 @@
+# Cypress
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+
+npm-debug.log*
+
+cypress/videos
+cypress/screenshots
