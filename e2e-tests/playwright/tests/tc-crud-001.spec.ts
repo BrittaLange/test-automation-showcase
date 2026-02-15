@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 
+// True if the customer creation success message is visible.
 let hasText: boolean | undefined;
 
 test('Create customer with valid data', async ({ page }) => {
@@ -10,6 +11,7 @@ test('Create customer with valid data', async ({ page }) => {
   // Arrange Test Data.
   const name = 'John Wayne';
   const location = 'Denver';
+
   // Act - Test steps.
   // Fill name into input field name.
   await page.locator('#inputName').fill(name);
@@ -17,7 +19,8 @@ test('Create customer with valid data', async ({ page }) => {
   await page.locator('#inputLocation').fill(location);
   // Click button "save".
   await page.getByText('Save').click();
-  // Assert.
+
+  // Assert - compare the actual value with the expected value.
   // Expect success message to be displayed.
   await expect(page.getByRole('alert')).toHaveText('New customer has been saved.');
   hasText = await page.getByRole('alert').locator('text=New customer has been saved.').count() > 0;
@@ -31,9 +34,9 @@ test('Create customer with valid data', async ({ page }) => {
   console.log('Created customer is displayed in the last row.');
 });
 
-test.afterEach('Teardown',async ({ page }) => {
+test.afterEach('Teardown, deleting customer',async ({ page }) => {
+  // Clean up and delete the created customer.
   if (hasText) {
-    // Clean up and delete the created customer.
     const lastRow = await page.locator('table tbody tr').last();
     const lastCol = await lastRow.locator('td').nth(2);
     const href = await lastCol.getByRole('link', { name: 'Delete' }).getAttribute('href');
