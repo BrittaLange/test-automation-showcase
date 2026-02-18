@@ -45,7 +45,7 @@ environment**, while remaining transparent about learning outcomes and trade-off
 
 ## Roadmap
 
-- [ ] Specify test cases
+- [x] Specify test cases
 - [ ] Add Playwright test implementation
 - [ ] Add Selenium test implementation
 - [ ] Add Cycpress test implementation
