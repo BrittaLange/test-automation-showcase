@@ -1,0 +1,17 @@
+# Maven
+/target/
+
+# JUnit / Test reports
+/target/surefire-reports/
+
+# IDE
+/.idea/
+/*.iml
+/.vscode/
+/out/
+
+# Logs
+*.log
+
+# Compiled class files
+*.class

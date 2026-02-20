@@ -8,8 +8,7 @@
   <version>1.0</version>
 
   <name>selenium-demo</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.invalid</url>
+  <url>http://localhost/simple-crud-webapp/app/</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
