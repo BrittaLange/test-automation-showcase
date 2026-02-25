@@ -30,25 +30,37 @@ public class TestSuite {
 		String title = driver.getTitle();
 		assertEquals("Simple CRUD Web App", title);
 
+  		// Arrange Test Data.
 		String name = "John Wayne";
 		String location = "Denver";
 
+		// Act - Test steps.
 		WebElement inputName = driver.findElement(By.id("inputName"));
 		WebElement inputLocation = driver.findElement(By.id("inputLocation"));
 		WebElement submitButton = driver.findElement(By.name("save"));
-
 		inputName.sendKeys(name);
 		inputLocation.sendKeys(location);
 		submitButton.click();
 
+		// Assert.
+		// Expect success message to be displayed.
 		WebElement message = driver.findElement(By.className("alert"));
-		String value = message.getText();
-		assertEquals("New customer has been saved.", value);
+		String actualMessage = message.getText();
+		assertEquals("New customer has been saved.", actualMessage);
 
+		// Expect customer to be displayed in table.
+		WebElement lastRowFirstCol = driver.findElement(By.xpath("//table/tbody/tr[last()]/td[1]"));
+		assertEquals(name, lastRowFirstCol.getText());
+		WebElement lastRowSecondCol = driver.findElement(By.xpath("//table/tbody/tr[last()]/td[2]"));
+		assertEquals(location, lastRowSecondCol.getText());
 	}
 
 	@AfterEach
 	public final void teardown() {
+		// Delete new customer.
+		WebElement deleteButton = driver.findElement(By.xpath("//table/tbody/tr[last()]/td[3]/a[text()=\"Delete\"]"));
+		deleteButton.click();
+
 		if (driver != null) {
 			driver.quit();
 		}

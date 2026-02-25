@@ -152,6 +152,25 @@ with following parameters:
 
 ---
 
+## Recap after installing and implementing the first test
+
+It was not neccessary to download any drivers for any of the three frameworks.
+
+### Selenium
+
+Selenium with Java and JUnit has no reports in nicely styled HTML files out of the box.
+The reports are created by maven surefire as XML files that can be used in the GitHub Actions CI workflow.
+Also there is a txt file being created with a summary of the tests that were executed with a result.
+
+### Playwright
+
+Playwright creates an HTML report with details to every test step, outputs to the console and traces.
+
+### Cypress 
+
+Cypress does not create reports without configuration when started. But when running the tests in
+Cypress UI every test step is visualized as the test executes.
+
 ## Documentation
 
 ### Selenium
@@ -159,6 +178,7 @@ with following parameters:
 https://www.selenium.dev/selenium/docs/api/java/index.html
 
 Run test: right-click on test case file and run
+Or use maven: mvn test
 
 ### Playright
 
