@@ -4,6 +4,11 @@
 # JUnit / Test reports
 /target/surefire-reports/
 
+### Allure
+/.allure
+/target/allure-results/
+/target/site/allure-maven-plugin/
+
 # IDE
 /.idea/
 /*.iml

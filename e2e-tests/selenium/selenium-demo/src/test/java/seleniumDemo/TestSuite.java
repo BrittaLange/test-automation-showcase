@@ -3,7 +3,8 @@ package seleniumDemo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.Duration;
-
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ public class TestSuite {
 	public void setup() {
 		driver = new ChromeDriver();
 	}
-
+    @Description("Create customer with valid data")
 	@Test
 	public void shouldCreateCustomerWithValidData() {
 
