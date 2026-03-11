@@ -1,29 +1,29 @@
-TestCaseID,Cypress,Playwright,Selenium
-TC-CRUD-001,True,True,True
-TC-CRUD-002,Planned,Planned,Planned
-TC-CRUD-003,Planned,Planned,Planned
-TC-CRUD-004,Planned,Planned,Planned
-TC-CRUD-015,Planned,Planned,Planned
-TC-CRUD-005,Planned,Planned,Planned
-TC-CRUD-007,Planned,Planned,Planned
-TC-CRUD-008,Planned,Planned,Planned
-TC-CRUD-009,Planned,Planned,Planned
-TC-CRUD-010,Planned,Planned,Planned
-TC-CRUD-011,Planned,Planned,Planned
-TC-CRUD-012,Planned,Planned,Planned
-TC-CRUD-013,Planned,Planned,Planned
+TestCaseID,Cypress,Playwright
+TC-CRUD-001,True,True
+TC-CRUD-002,Planned,Planned
+TC-CRUD-003,Planned,Planned
+TC-CRUD-004,Planned,Planned
+TC-CRUD-015,Planned,Planned
+TC-CRUD-005,Planned,Planned
+TC-CRUD-007,Planned,Planned
+TC-CRUD-008,Planned,Planned
+TC-CRUD-009,Planned,Planned
+TC-CRUD-010,Planned,Planned
+TC-CRUD-011,Planned,Planned
+TC-CRUD-012,Planned,Planned
+TC-CRUD-013,Planned,Planned
 
-SEC-A03-001,Planned,Planned,Planned
-SEC-A03-002,Planned,Planned,Planned
-SEC-A03-003,Planned,Planned,Planned
-SEC-A03-004,Planned,Planned,Planned
-SEC-A03-005,Planned,Planned,Planned
-SEC-A04-001,Planned,Planned,Planned
-SEC-A04-002,Planned,Planned,Planned
-SEC-A04-003,Planned,Planned,Planned
-SEC-A04-004,Planned,Planned,Planned
-SEC-A05-001,Planned,Planned,Planned
-SEC-A05-002,Not Automated,Not Automated,Not Automated
-SEC-A05-003,Not Automated,Not Automated,Not Automated
-SEC-A05-004,Planned,Planned,Planned
-SEC-A05-005,Planned,Planned,Planned
+SEC-A03-001,Planned,Planned
+SEC-A03-002,Planned,Planned
+SEC-A03-003,Planned,Planned
+SEC-A03-004,Planned,Planned
+SEC-A03-005,Planned,Planned
+SEC-A04-001,Planned,Planned
+SEC-A04-002,Planned,Planned
+SEC-A04-003,Planned,Planned
+SEC-A04-004,Planned,Planned
+SEC-A05-001,Planned,Planned
+SEC-A05-002,Not Automated,Not Automated
+SEC-A05-003,Not Automated,Not Automated
+SEC-A05-004,Planned,Planned
+SEC-A05-005,Planned,Planned

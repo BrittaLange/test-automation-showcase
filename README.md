@@ -47,7 +47,6 @@ environment**, while remaining transparent about learning outcomes and trade-off
 
 - [x] Specify test cases
 - [ ] Add Playwright test implementation
-- [ ] Add Selenium test implementation
 - [ ] Add Cycpress test implementation
 - [ ] Add CI pipeline
 
@@ -56,7 +55,6 @@ environment**, while remaining transparent about learning outcomes and trade-off
 ## Technologies
 
 - **Playwright** – modern web E2E testing
-- **Selenium WebDriver** – established web automation standard
 - **Cypress** – fast web testing with developer-friendly experience
 - **PHP** – application under test
 - **GitHub Actions** – continuous integration
