@@ -65,7 +65,7 @@ if (isset($_POST['name'])) {
         $errorMessage['location'] = 'The Location should not be longer than 120 characters.';
     }
     if (strlen($location) == 0) {
-        $errorMessage['location'] = 'Location is required';
+        $errorMessage['location'] = 'Location is required.';
     }
     // Saving input in database when validation passes.
     if (empty(($errorMessage)) && (isset($_POST['save']))) {
