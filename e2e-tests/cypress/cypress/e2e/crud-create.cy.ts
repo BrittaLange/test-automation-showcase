@@ -107,4 +107,10 @@ describe('Create customer', () => {
       .eq(1) // Second column
       .should('not.contain', validationErrorMsg)
   })
+
+  after('Clean up and empty the table', () => {
+    cy.get('table tbody tr')
+    .last()
+    .find('td').contains('Delete').click()
+  })
 })
