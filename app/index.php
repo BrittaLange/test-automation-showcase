@@ -11,6 +11,7 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $update = false;
 $id = -1;
 $messageType = '';
+$maxLengthInputField = 120;
 // Deleting a customer dataset.
 if (isset($_GET['delete'])) {
     try {
@@ -51,8 +52,8 @@ if (isset($_POST['name'])) {
     if (isset($_POST['name'])) {
         $name = trim($_POST['name']);
     }
-    if (strlen($name) > 120) {
-        $errorMessage['name'] = 'The Name should not be longer than 120 characters.';
+    if (strlen($name) > $maxLengthInputField) {
+        $errorMessage['name'] = 'The name should not be longer than 120 characters.';
     }
     if (strlen($name) == 0) {
         $errorMessage['name'] = 'Name is required.';
@@ -61,8 +62,8 @@ if (isset($_POST['name'])) {
     if (isset($_POST['location'])) {
         $location = trim($_POST['location']);
     }
-    if (strlen($location) > 120) {
-        $errorMessage['location'] = 'The Location should not be longer than 120 characters.';
+    if (strlen($location) > $maxLengthInputField) {
+        $errorMessage['location'] = 'The location should not be longer than 120 characters.';
     }
     if (strlen($location) == 0) {
         $errorMessage['location'] = 'Location is required.';
