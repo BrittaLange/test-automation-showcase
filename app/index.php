@@ -1,4 +1,6 @@
 <?php
+require 'validation.php';
+
 // Check if config file is readable.
 $path = __DIR__ . '/../../../config/connect.php';
 if (!is_readable($path)) {
@@ -11,7 +13,6 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $update = false;
 $id = -1;
 $messageType = '';
-$maxLengthInputField = 120;
 // Deleting a customer dataset.
 if (isset($_GET['delete'])) {
     try {
@@ -44,32 +45,21 @@ if (isset($_GET['edit'])) {
         $messageType = 'danger';
     }
 }
-// Input Validations
+// Input Validations.
 $errorMessage = [];
 unset($errorMessage);
 if (isset($_POST['name'])) {
-    // Validating name field.
-    if (isset($_POST['name'])) {
-        $name = trim($_POST['name']);
-    }
-    if (strlen($name) > $maxLengthInputField) {
-        $errorMessage['name'] = 'The name should not be longer than 120 characters.';
-    }
-    if (strlen($name) == 0) {
-        $errorMessage['name'] = 'Name is required.';
-    }
-    // Validating location field.
-    if (isset($_POST['location'])) {
-        $location = trim($_POST['location']);
-    }
-    if (strlen($location) > $maxLengthInputField) {
-        $errorMessage['location'] = 'The location should not be longer than 120 characters.';
-    }
-    if (strlen($location) == 0) {
-        $errorMessage['location'] = 'Location is required.';
-    }
+    // Valdidating form.
+    $validationResult = validateForm($_POST);
+
+    $data = $validationResult['data'];
+    $errors = $validationResult['errors'];
+
+    $name = $data['name'];
+    $location = $data['location'];
+
     // Saving input in database when validation passes.
-    if (empty(($errorMessage)) && (isset($_POST['save']))) {
+    if (empty(($errors)) && (isset($_POST['save']))) {
         try {
             // Prepared INSERT SQL statement.
             $sql = "INSERT INTO customers (name, location) VALUES (:name, :location)";
@@ -97,7 +87,7 @@ if (isset($_POST['name'])) {
         }
     }
     // Updating a customer.
-    if (isset($_POST['update'])) {
+    if (empty(($errors)) && isset($_POST['update'])) {
         try {
             $id = $_POST['id'];
             $sql = "UPDATE customers SET name = :name, location = :location WHERE id = :id";
@@ -210,12 +200,12 @@ if (isset($_POST['name'])) {
                     <div class="mb-3">
                         <label for="inputName" class="form-label">Name</label>
                         <input type="text" name="name" class="form-control" id="inputName" maxlength="120" value="<?= htmlspecialchars($name ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        <div id="nameRequired" class="form-text text-danger"><?= $errorMessage['name'] ?? ''; ?></div>
+                        <div id="nameRequired" class="form-text text-danger"><?= $errors['name'] ?? ''; ?></div>
                     </div>
                     <div class="mb-3">
                         <label for="inputLocation" class="form-label">Location</label>
                         <input type="text" name="location" class="form-control" id="inputLocation" maxlength="120" value="<?= htmlspecialchars($location ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                        <div id="locationRequired" class="form-text text-danger"><?= $errorMessage['location'] ?? ''; ?></div>
+                        <div id="locationRequired" class="form-text text-danger"><?= $errors['location'] ?? ''; ?></div>
                     </div>
                     <?php if ($update == true): ?>
                         <button type="submit" class="btn btn-info" name="update">Update</button>
