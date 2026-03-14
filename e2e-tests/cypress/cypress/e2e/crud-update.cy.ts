@@ -1,0 +1,112 @@
+describe('Update customers', () => {
+
+    it('[tc-crud-008] updates customer with valid data', () => {
+        cy.visit('http://localhost/simple-crud-webapp/app/')
+        // Create new customer to fill the customer list
+        const name = 'Buster Keaton'
+        const location = 'New York'
+        const nameEdited = 'Johnny Wayne'
+        const locationEdited = 'Boulder'
+        cy.get('[name="name"]').type(name)
+        cy.get('[name="location"]').type(location)
+        cy.get('[name="save"]').click()
+        
+        // Edit the customer.
+        cy.get('.btn-info').click()
+        cy.get('[name="name"]').clear()
+        cy.get('[name="name"]').type(nameEdited)
+        cy.get('[name="location"]').clear()
+        cy.get('[name="location"]').type(locationEdited)
+        cy.get('[name="update"]').click()
+        
+        // Expect success message
+        cy.get('.alert').should("contain", "Your changes have been saved.")
+        // Expect to find edited customer in list.
+        cy.get('table tbody tr')
+        .last()
+        .find('td')
+        .eq(0) // First column
+        .should('contain', nameEdited)
+
+        cy.get('table tbody tr')
+        .last()
+        .find('td')
+        .eq(1) // Second column
+        .should('contain', locationEdited)
+
+        // Clean up and delete the created customer.
+        cy.get('table tbody tr')
+        .last()
+        .find('td').contains('Delete').click()
+    })
+
+    it('[tc-crud-009] updates customer with empty name', () => {
+        cy.visit('http://localhost/simple-crud-webapp/app/')
+        // Create new customer to fill the customer list
+        const name = 'John Wayne'
+        const location = 'Denver'
+        cy.get('[name="name"]').type(name)
+        cy.get('[name="location"]').type(location)
+        cy.get('[name="save"]').click()
+
+        // Edit new customer.
+        cy.get('.btn-info').click()
+        cy.get('[name="name"]').clear()
+        cy.get('[name="update"]').click()
+
+        // Expect customer not to be displayed in table.
+        cy.get('table tbody tr')
+        .last()
+        .find('td')
+        .eq(0) // First column
+        .should('not.be.empty')
+    })
+
+    it('[tc-crud-010] updates customer with empty location', () => {
+        cy.visit('http://localhost/simple-crud-webapp/app/')
+        const name = 'John Wayne'
+        const location = 'Denver'
+        cy.get('[name="name"]').type(name)
+        cy.get('[name="location"]').type(location)
+        cy.get('[name="save"]').click()
+
+        // Edit new customer.
+        cy.get('.btn-info').click()
+        cy.get('[name="location"]').clear()
+        cy.get('[name="update"]').click()
+
+        // Expect customer not to be displayed in table.
+        cy.get('table tbody tr')
+        .last()
+        .find('td')
+        .eq(1) // Second column
+        .should('not.be.empty')
+    })
+
+    it('[tc-crud-011] cancels customer update', () => {
+        cy.visit('http://localhost/simple-crud-webapp/app/')
+        // Create new customer to fill the customer list
+        const name = 'John Wayne'
+        const location = 'Denver'
+        const nameEdited = 'Clint Eastwood'
+        const locationEdited = 'Colorado'
+        cy.get('[name="name"]').type(name)
+        cy.get('[name="location"]').type(location)
+        cy.get('[name="save"]').click()
+
+        // Edit new customer.
+        cy.get('.btn-info').click()
+        cy.get('[name="name"]').clear()
+        cy.get('[name="name"]').type(nameEdited)
+        cy.get('[name="location"]').clear()
+        cy.get('[name="location"]').type(locationEdited)
+        cy.get('[name="cancel"]').click()
+
+        // Expect customer not to be displayed in table.
+        cy.get('table tbody tr')
+        .last()
+        .find('td')
+        .eq(1) // Second column
+        .should('not.be.empty')
+    })
+})
