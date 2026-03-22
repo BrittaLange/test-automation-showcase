@@ -175,8 +175,7 @@ if (isset($_POST['name'])) {
                             echo '<td>';
                             echo '<a href="index.php?edit=';
                             echo htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '" class="btn btn-info me-2" type="button">Edit</a>';
-                            echo '<a href="index.php?delete=';
-                            echo htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '" class="btn btn-danger" type="button">Delete</a>';
+                            echo '<a href="index.php?delete=' . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . '" class="btn btn-danger delete-btn">Delete</a>';
                             echo '</td>';
                             echo "</tr>";
                             }
@@ -190,7 +189,7 @@ if (isset($_POST['name'])) {
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-8">
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" <?php if ($update == true): ?> onsubmit="return confirmUpdate();"<?php endif; ?>>
                     <?php if ($update == true): ?>
                         <legend>Edit customer</legend>
                     <?php else: ?>
@@ -216,7 +215,21 @@ if (isset($_POST['name'])) {
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".delete-btn").forEach(function(button) {
+                button.addEventListener("click", function(e) {
+                    if (!confirm("Are you sure you want to delete this item?")) {
+                        e.preventDefault(); // stop navigation
+                    }
+                });
+            });
+        });
 
+        function confirmUpdate() {
+            return confirm("Are you sure you want to update?");
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 
