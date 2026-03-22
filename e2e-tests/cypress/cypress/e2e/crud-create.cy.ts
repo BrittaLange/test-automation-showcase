@@ -19,23 +19,8 @@ describe('Create customer', () => {
 
     // Expect success message
     cy.get('.alert').should("contain", "New customer has been saved.")
-    // Expect customer to be displayed in table.
-    cy.get('table tbody tr')
-      .last()
-      .find('td')
-      .eq(0) // First column
-      .should('contain', name)
-
-    cy.get('table tbody tr')
-      .last()
-      .find('td')
-      .eq(1) // Second column
-      .should('contain', location)
-
-    // Clean up and delete the created customer.
-    cy.get('table tbody tr')
-      .last()
-      .find('td').contains('Delete').click()
+    // Expect customer to be displayed in table and clean up and delete it.
+    cy.findLatestEntryAndCheckContent(name, location)?.click()
   })
 
   it('[tc-crud-002] creates customer with empty name', () => {
