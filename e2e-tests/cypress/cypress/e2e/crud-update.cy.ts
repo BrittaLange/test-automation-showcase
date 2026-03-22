@@ -100,13 +100,22 @@ describe('Update customers', () => {
         cy.get('[name="name"]').type(nameEdited)
         cy.get('[name="location"]').clear()
         cy.get('[name="location"]').type(locationEdited)
-        cy.get('[name="cancel"]').click()
+        cy.get('[name="update"]').click()
+        cy.on('window:confirm', (text) => {
+            expect(text).to.contains('Are you sure you want to update?');
+            return false; // simulates "Cancel"
+        })
 
         // Expect customer not to be displayed in table.
         cy.get('table tbody tr')
         .last()
         .find('td')
+        .eq(0) // First column
+        .should('not.contain', nameEdited)
+        cy.get('table tbody tr')
+        .last()
+        .find('td')
         .eq(1) // Second column
-        .should('not.be.empty')
+        .should('not.contain', locationEdited)
     })
 })
