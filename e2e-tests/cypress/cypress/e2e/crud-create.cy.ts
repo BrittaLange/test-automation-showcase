@@ -2,6 +2,7 @@ describe('Create customer', () => {
 
   before('Table shall not be empty', () => {
     cy.visit('http://localhost/simple-crud-webapp/app/')
+    cy.deleteAllEntries()
     const name = 'Collin Farrell'
     const location = 'Denver'
     cy.get('[name="name"]').type(name)
@@ -10,13 +11,15 @@ describe('Create customer', () => {
   })
 
   it('[tc-crud-001] creates a customer with valid data', () => {
+    // Open the test object - a web app.
     cy.visit('http://localhost/simple-crud-webapp/app/')
+    // Define test data.
     const name = 'John Wayne'
     const location = 'Denver'
+    // Execute test steps.
     cy.get('[name="name"]').type(name)
     cy.get('[name="location"]').type(location)
     cy.get('[name="save"]').click()
-
     // Expect success message
     cy.get('.alert').should("contain", "New customer has been saved.")
     // Expect customer to be displayed in table and clean up and delete it.
@@ -32,12 +35,11 @@ describe('Create customer', () => {
     cy.get('[name="save"]').click()
     // Expect validation error to be displayed.
     cy.get('#nameRequired').should('contain', validationErrorMsg)
-    // Expect customer not to be displayed in table.
-    cy.get('table tbody tr')
-      .last()
-      .find('td')
-      .eq(0) // First column
-      .should('not.be.empty')
+    // Expect customer with empty name not to be displayed in table.
+    cy.getLatestEntry().should((entry) => {
+      if (!entry) throw new Error('Expected latest entry to exist')
+      expect(entry.name).to.not.be.empty
+    })
   })
 
   it('[tc-crud-003] creates customer with empty location', () => {
@@ -49,13 +51,13 @@ describe('Create customer', () => {
     cy.get('[name="save"]').click()
     // Expect validation error to be displayed.
     cy.get('#locationRequired').should('contain', validationErrorMsg)
-    // Expect customer not to be displayed in table.
-    cy.get('table tbody tr')
-      .last()
-      .find('td')
-      .eq(1) // Second column
-      .should('not.be.empty')
+    // Expect customer with empty location not to be displayed in table.
+    cy.getLatestEntry().should((entry) => {
+      if (!entry) throw new Error('Expected latest entry to exist')      
+      expect(entry.location).to.not.be.empty
+    })
   })
+
 
   it('[tc-crud-004] creates customer with name exceeding max length', () => {
     cy.visit('http://localhost/simple-crud-webapp/app/')
@@ -67,15 +69,15 @@ describe('Create customer', () => {
     cy.get('[name="save"]').click()
     // Expect validation error to be displayed.
     cy.get('#nameRequired').should('contain', validationErrorMsg)
-    // Expect customer name not to be displayed in table.
-    cy.get('table tbody tr')
-      .last()
-      .find('td')
-      .eq(0) // First column
-      .should('not.contain', validationErrorMsg)
+    // Expect customer with too long name not to be displayed in table.
+    cy.getLatestEntry().should((entry) => {
+      if (!entry) throw new Error('Expected latest entry to exist')
+      expect(entry.name).to.not.contain(validationErrorMsg)
+    })
   })
 
-    it('[tc-crud-015] creates customer with location exceeding max length', () => {
+
+  it('[tc-crud-015] creates customer with location exceeding max length', () => {
     cy.visit('http://localhost/simple-crud-webapp/app/')
     const name = 'John Wayne'
     const location = 'Dieser Satz ist genau 121 Zeichen lang, einschließlich Leerzeichen, Worte und Satzzeichen, um die Behauptung zu beweisen.'
@@ -85,17 +87,15 @@ describe('Create customer', () => {
     cy.get('[name="save"]').click()
     // Expect validation error to be displayed.
     cy.get('#locationRequired').should('contain', validationErrorMsg)
-    // Expect customer location not to be displayed in table.
-    cy.get('table tbody tr')
-      .last()
-      .find('td')
-      .eq(1) // Second column
-      .should('not.contain', validationErrorMsg)
+    // Expect customer with too long location not to be displayed in table.
+    cy.getLatestEntry().should((entry) => {
+      if (!entry) throw new Error('Expected latest entry to exist')
+      expect(entry.location).to.not.contain(validationErrorMsg)
+    })
   })
 
   after('Clean up and empty the table', () => {
-    cy.get('table tbody tr')
-    .last()
-    .find('td').contains('Delete').click()
+    cy.visit('http://localhost/simple-crud-webapp/app/')
+    cy.deleteAllEntries()
   })
 })

@@ -12,20 +12,19 @@ declare global {
   namespace Cypress {
     interface Chainable {
       /**
-       * Returns the latest entry found by comparing the ids.
+       * Returns the latest entry found by comparing the ids or undefined if there is none.
        * @example
        * cy.getLatestEntry()
-       * @returns A Chainable resolving to the table entry with the highest id.
+       * @returns A Chainable resolving to the table entry with the highest id or undefined.
        */
-      getLatestEntry(): Chainable<TableEntry>
+      getLatestEntry(): Chainable<TableEntry | undefined>
 
       /**
        * Deletes the entry with the highest delete ID.
        * @example
        * cy.findLatestEntryAndDeleteIt()
-       * @returns A Chainable resolving to the deleted entry's ID.
        */
-      findLatestEntryAndDeleteIt(): Chainable<number>
+      findLatestEntryAndDeleteIt(): void  
 
       /**
        * Finds the entry with the highest ID and verifies its name and location.
@@ -36,6 +35,14 @@ declare global {
        * @returns A Chainable resolving to the clickable delete button if found.
        */
       findLatestEntryAndCheckContent(expectedName: string, expectedLocation: string): Chainable<JQuery<HTMLAnchorElement>>
+
+      /**
+       * Deletes all entries in the table (from newest to oldest).
+       * @example
+       * cy.deleteAllEntries()
+       * @returns A Chainable resolving to an array of deleted entry IDs.
+       */
+      deleteAllEntries(): Chainable<void>
     }
   }
 }
@@ -46,18 +53,13 @@ Cypress.Commands.add('getLatestEntry', () => {
       .map((row) => {
         const cells = row.querySelectorAll('td')
         if (cells.length < 3) return undefined
-
         const name = cells[0].innerText.trim()
         const location = cells[1].innerText.trim()
-
         const link = cells[2].querySelector<HTMLAnchorElement>('a.btn-danger')
         const href = link?.getAttribute('href')
-
         if (!link || !href) return undefined
-
         const match = href.match(/delete=(\d+)/)
         if (!match) return undefined
-
         return {
           id: Number(match[1]),
           name,
@@ -68,29 +70,18 @@ Cypress.Commands.add('getLatestEntry', () => {
       })
       .filter((e): e is TableEntry => Boolean(e)) // type-safe filter
       .value()
-
-    const latest = Cypress._.maxBy(entries, 'id')
-
-    if (!latest) {
-      throw new Error('No valid table entries found')
-    }
-
-    return latest
-  })
+    return Cypress._.maxBy(entries, 'id')
+  }) as Cypress.Chainable<TableEntry | undefined>
 })
 
 Cypress.Commands.add('findLatestEntryAndDeleteIt', () => {
-  return cy.getLatestEntry().then((latest) => {
-    if (!latest) {
-      throw new Error('No latest entry found')
-    }
-
-    return cy.get(`a[href="${latest.href}"]`)
+  cy.getLatestEntry().then((latest) => {
+    if (latest != undefined) {
+      cy.get(`a[href="${latest.href}"]`)
       .click()
-      .then(() => latest.id)
+    }
   })
 })
-
 
 Cypress.Commands.add(
   'findLatestEntryAndCheckContent', (expectedName: string, expectedLocation: string) => {
@@ -105,3 +96,21 @@ Cypress.Commands.add(
       })
   }
 )
+
+Cypress.Commands.add('deleteAllEntries', () => {
+  const deleteUntilEmpty = () => {
+    cy.getLatestEntry().then((latest) => {
+      if (!latest) {
+        return
+      }
+      if (latest.href != undefined) {
+         cy.get(`a[href="${latest.href}"]`)
+          .click()
+          .then(() => {
+            deleteUntilEmpty() 
+        })
+      }
+    })
+  }
+  deleteUntilEmpty()
+})
