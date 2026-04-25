@@ -28,6 +28,7 @@ describe('Display customers', () => {
 
     it('[tc-crud-007] shows empty customer list', () => {
         cy.visit('http://localhost/simple-crud-webapp/app/')
+        cy.deleteAllEntries()
         cy.get('td').should('contain', 'No customers found.')
     })
 })
