@@ -1,5 +1,10 @@
 describe('Update customers', () => {
 
+    before('Empty table', () => {
+        cy.visit('http://localhost/simple-crud-webapp/app/')
+        cy.deleteAllEntries()
+    })
+
     it('[tc-crud-008] updates customer with valid data', () => {
         cy.visit('http://localhost/simple-crud-webapp/app/')
         // Create new customer to fill the customer list
@@ -22,22 +27,10 @@ describe('Update customers', () => {
         // Expect success message
         cy.get('.alert').should("contain", "Your changes have been saved.")
         // Expect to find edited customer in list.
-        cy.get('table tbody tr')
-        .last()
-        .find('td')
-        .eq(0) // First column
-        .should('contain', nameEdited)
-
-        cy.get('table tbody tr')
-        .last()
-        .find('td')
-        .eq(1) // Second column
-        .should('contain', locationEdited)
+        cy.findLatestEntryAndCheckContent(nameEdited, locationEdited)
 
         // Clean up and delete the created customer.
-        cy.get('table tbody tr')
-        .last()
-        .find('td').contains('Delete').click()
+        cy.findLatestEntryAndDeleteIt()
     })
 
     it('[tc-crud-009] updates customer with empty name', () => {
@@ -54,12 +47,11 @@ describe('Update customers', () => {
         cy.get('[name="name"]').clear()
         cy.get('[name="update"]').click()
 
-        // Expect customer not to be displayed in table.
-        cy.get('table tbody tr')
-        .last()
-        .find('td')
-        .eq(0) // First column
-        .should('not.be.empty')
+        // Expect empty name not to be displayed in table.
+        cy.getLatestEntry().then((entry) => {
+            if (!entry) throw new Error('Expected latest entry to exist')
+            expect(entry.name).not.to.be.empty
+        })
     })
 
     it('[tc-crud-010] updates customer with empty location', () => {
@@ -75,12 +67,11 @@ describe('Update customers', () => {
         cy.get('[name="location"]').clear()
         cy.get('[name="update"]').click()
 
-        // Expect customer not to be displayed in table.
-        cy.get('table tbody tr')
-        .last()
-        .find('td')
-        .eq(1) // Second column
-        .should('not.be.empty')
+        // Expect empty location not to be displayed in table.
+        cy.getLatestEntry().then((entry) => {
+            if (!entry) throw new Error('Expected latest entry to exist')
+            expect(entry.location).not.to.be.empty
+        })
     })
 
     it('[tc-crud-011] cancels customer update', () => {
@@ -101,21 +92,22 @@ describe('Update customers', () => {
         cy.get('[name="location"]').clear()
         cy.get('[name="location"]').type(locationEdited)
         cy.get('[name="update"]').click()
-        cy.on('window:confirm', (text) => {
+        // Handle confirm dialog - click cancel.
+        cy.once('window:confirm', (text) => {
             expect(text).to.contains('Are you sure you want to update?');
             return false; // simulates "Cancel"
         })
 
         // Expect customer not to be displayed in table.
-        cy.get('table tbody tr')
-        .last()
-        .find('td')
-        .eq(0) // First column
-        .should('not.contain', nameEdited)
-        cy.get('table tbody tr')
-        .last()
-        .find('td')
-        .eq(1) // Second column
-        .should('not.contain', locationEdited)
+        cy.getLatestEntry().then((entry) => {
+            if (!entry) throw new Error('Expected latest entry to exist')
+            expect(entry.name).to.not.be.equal(nameEdited)
+            expect(entry.location).to.not.be.equal(locationEdited)
+        })
+    })
+
+    after('Clean up and empty the table', () => {
+        cy.visit('http://localhost/simple-crud-webapp/app/')
+        cy.deleteAllEntries()
     })
 })
