@@ -1,0 +1,151 @@
+
+
+DevTools listening on ws://127.0.0.1:53560/devtools/browser/97832415-4980-4254-a3c1-3b5fd6a50220
+
+====================================================================================================
+
+  (Run Starting)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Cypress:        15.10.0                                                                        │
+  │ Browser:        Electron 138 (headless)                                                        │
+  │ Node Version:   v22.20.0 (E:\Programme\nodejs\node.exe)                                        │
+  │ Specs:          4 found (crud-create.cy.ts, crud-delete.cy.ts, crud-read.cy.ts, crud-update.cy │
+  │                 .ts)                                                                           │
+  │ Searched:       cypress/e2e/**/*.cy.{js,jsx,ts,tsx}                                            │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  crud-create.cy.ts                                                               (1 of 4)
+
+
+  Create customer
+    √ [tc-crud-001] creates a customer with valid data (1899ms)
+    √ [tc-crud-002] creates customer with empty name (501ms)
+    √ [tc-crud-003] creates customer with empty location (549ms)
+    √ [tc-crud-004] creates customer with name exceeding max length (1784ms)
+    √ [tc-crud-015] creates customer with location exceeding max length (1861ms)
+
+
+  5 passing (8s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        5                                                                                │
+  │ Passing:      5                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     7 seconds                                                                        │
+  │ Spec Ran:     crud-create.cy.ts                                                                │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  crud-delete.cy.ts                                                               (2 of 4)
+
+
+  Delete customer
+    √ [tc-crud-012] deletes an existing customer (805ms)
+
+
+  1 passing (2s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 second                                                                         │
+  │ Spec Ran:     crud-delete.cy.ts                                                                │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  crud-read.cy.ts                                                                 (3 of 4)
+
+
+  Display customers
+    √ [tc-crud-005] shows customer list with existing records (791ms)
+    √ [tc-crud-007] shows empty customer list (34ms)
+
+
+  2 passing (2s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        2                                                                                │
+  │ Passing:      2                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     1 second                                                                         │
+  │ Spec Ran:     crud-read.cy.ts                                                                  │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  crud-update.cy.ts                                                               (4 of 4)
+
+
+  Update customers
+    √ [tc-crud-008] updates customer with valid data (1639ms)
+    √ [tc-crud-009] updates customer with empty name (902ms)
+    √ [tc-crud-010] updates customer with empty location (917ms)
+    √ [tc-crud-011] cancels customer update (1417ms)
+
+
+  4 passing (6s)
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        4                                                                                │
+  │ Passing:      4                                                                                │
+  │ Failing:      0                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  0                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     5 seconds                                                                        │
+  │ Spec Ran:     crud-update.cy.ts                                                                │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+====================================================================================================
+
+  (Run Finished)
+
+
+       Spec                                              Tests  Passing  Failing  Pending  Skipped  
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ √  crud-create.cy.ts                        00:07        5        5        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ √  crud-delete.cy.ts                        00:01        1        1        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ √  crud-read.cy.ts                          00:01        2        2        -        -        - │
+  ├────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ √  crud-update.cy.ts                        00:05        4        4        -        -        - │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+    √  All specs passed!                        00:16       12       12        -        -        -  
+
